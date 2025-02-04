@@ -1,0 +1,4 @@
+P1 writes before fork
+P2 writes after fork
+P1 writes before fork
+P1 writes after P2 finishes
