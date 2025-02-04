@@ -113,7 +113,7 @@ This guide serves as a comprehensive reference for commonly used Linux commands.
 **Description:** Securely copies files between local and remote systems.
 
 **Usage:**
-- `scp abc.txt manas@10.2.1.40:~/` – Copies `abc.txt` to the home directory of `manas` on the remote server.
+- `scp abc.txt hello@10.2.1.40:~/` – Copies `abc.txt` to the home directory of `hello` on the remote server.
 
 ---
 
