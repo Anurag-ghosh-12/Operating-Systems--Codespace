@@ -14,13 +14,13 @@
 int shm_id;
 
 int main() {
-    int rows_A, cols_A, cols_B;
-    printf("Enter the dimensions of matrix A (rows cols): ");
+    int rows_A, cols_A, cols_B,rows_B;
+    printf("Enter the dimensions of matrix A (rows columns): ");
     scanf("%d %d", &rows_A, &cols_A);
 
-    printf("Enter dimensions of matrix B (cols rows): ");
-    scanf("%d %d", &cols_A, &cols_B);
-    if (cols_A <= 0 || rows_A <= 0 || cols_B <= 0) {
+    printf("Enter dimensions of matrix B (rows columns): ");
+    scanf("%d %d", &rows_B, &cols_B);
+    if (cols_A <= 0 || rows_A <= 0 || cols_B <= 0 || rows_B!=cols_A) {
         fprintf(stderr, "Invalid matrix dimensions for multiplication.\n");
         exit(EXIT_FAILURE);
     }
@@ -32,7 +32,7 @@ int main() {
         }
     }
     printf("Enter the elements of matrix B (%d x %d):\n", cols_A, cols_B);
-    for (int i = 0; i < cols_A; i++) {
+    for (int i = 0; i < cols_A; i++) {//since rowsB=colsA
         for (int j = 0; j < cols_B; j++) {
             scanf("%d", &matrix_B[i][j]);
         }

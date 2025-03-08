@@ -43,9 +43,9 @@ int main() {
     sighandler_t shandler;
     /* install signal handler */
     shandler = signal(SIGINT, releaseSHM); /* should we call this separately in parent and child process */
-
     // Create shared memory
-    shmid = shmget(SHM_KEY, SHM_SIZE, IPC_CREAT | 0666);
+    key_t k=ftok("abcd",65);
+    shmid = shmget(k, SHM_SIZE, IPC_CREAT | 0666);
     if (shmid == -1) {
         perror("shmget failed");
         exit(1);

@@ -20,7 +20,8 @@ struct task {
 };
 
 int main() {
-    int shmid = shmget(SHM_KEY, SHM_SIZE, 0666);
+    key_t k=ftok("abcd",65);
+    int shmid = shmget(k, SHM_SIZE, 0666);
     if (shmid == -1) {
         perror("shmget failed");
         exit(1);

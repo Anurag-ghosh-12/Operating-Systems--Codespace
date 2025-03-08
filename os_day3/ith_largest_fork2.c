@@ -7,8 +7,6 @@
 int find_ith_largest(int *arr, int n, int i) {
     int max = INT_MIN;
     int min = INT_MAX;
-
-    // Find the range of the numbers
     for (int j = 0; j < n; j++) {
         if (arr[j] > max) max = arr[j];
         if (arr[j] < min) min = arr[j];
@@ -17,23 +15,17 @@ int find_ith_largest(int *arr, int n, int i) {
     int range = max - min + 1;
     int *count = (int *)calloc(range, sizeof(int));
     if (count == NULL) {
-        //dynamic mem. allocation failure if any to be handled by this
 	    perror("calloc");
         exit(1);
     }
-
-    // Counting  the occurrences of each number
     for (int j = 0; j < n; j++) {
         count[arr[j] - min]++;
     }
-
-    // Find the ith largest number
     int total = 0;
     for (int j = range - 1; j >= 0; j--) {
         total += count[j];
         if (total >= i) {
-            free(count);//mem. allocated deallocated as no more count reqd
-	    //we have found the ith largest
+            free(count);
             return j + min;
         }
     }
@@ -58,7 +50,7 @@ int main() {
         scanf("%d", &arr[i]);
     }
     
-    int childprocess[n];
+    pid_t childprocess[n];
     for (int i = 0; i < n; i++) {
         pid_t p = fork();
         if (p < 0) {
@@ -82,9 +74,9 @@ int main() {
     for(int i=0;i<n;i++)
     {
         int status = 0;
-        pid_t finished_pid = waitpid(childprocess[i], &status, 0);
+        pid_t finish_pid = waitpid(childprocess[i], &status, 0);
 
-        if (finished_pid < 0) {
+        if (finish_pid < 0) {
             perror("waitpid");
             exit(1);
         }

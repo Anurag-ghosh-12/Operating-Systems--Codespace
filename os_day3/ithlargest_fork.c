@@ -8,7 +8,7 @@ int find_ith_largest(int *arr, int n, int i) {
     int max = INT_MIN;
     int min = INT_MAX;
 
-    // Find the range of the numbers
+    // Finding the range of the numbers
     for (int j = 0; j < n; j++) {
         if (arr[j] > max) max = arr[j];
         if (arr[j] < min) min = arr[j];
@@ -17,24 +17,21 @@ int find_ith_largest(int *arr, int n, int i) {
     int range = max - min + 1;
     int *count = (int *)calloc(range, sizeof(int));
     if (count == NULL) {
-        //dynamic mem. allocation failure if any to be handled by this
 	    perror("calloc");
         exit(1);
     }
 
-    // Counting  the occurrences of each number
     for (int j = 0; j < n; j++) {
         count[arr[j] - min]++;
     }
 
-    // Find the ith largest number
+    // Finding the ith largest number
     int total = 0;
     for (int j = range - 1; j >= 0; j--) {
         total += count[j];
         if (total >= i) {
-            free(count);//mem. allocated deallocated as no more count reqd
-	    //we have found the ith largest
-            return j + min;
+            free(count);
+            return j + min;// as min -> 0th index , min+1->1st etc
         }
     }
 

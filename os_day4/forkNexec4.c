@@ -17,7 +17,6 @@ int main() {
     printf("-----------------------------------\n");
     char str[100];
     printf("Enter a valid executable file name with switches (seperate by spaces) : ");
-    
     fgets(str, sizeof(str), stdin);
     str[strcspn(str, "\n")] = 0;//removing newline
     
@@ -36,7 +35,8 @@ int main() {
 		if(str[i] == ' ' && str[i+1] != ' ' && str[i+1] != '\0') {
 		    count++;
 		}
-	    }
+	      }
+	      
 	    count++; // For the last word
 
 	    printf("Number of words entered by user: %d\n", count);
@@ -44,7 +44,6 @@ int main() {
 	    char *myargv[count + 1];
 	    char word[100];
 	    int x = 0, w = 0;
-
 	    for(int i = 0; i <= strlen(str); i++) {
 		if(str[i] != ' ' && str[i] != '\0') {
 		    word[w++] = str[i];
