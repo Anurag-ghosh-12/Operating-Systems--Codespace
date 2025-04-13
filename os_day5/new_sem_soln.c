@@ -45,12 +45,13 @@ int main(int argc, char *argv[]) {
     /*
      * Command: create
      */
+    int nsems;
     if (strcmp(command, "create") == 0) {
         if (argc != 5) {
             usage(argv[0]);
             exit(EXIT_FAILURE);
         }
-        int nsems = atoi(argv[4]);//number of semaphores
+        nsems = atoi(argv[4]);//number of semaphores
         semid = semget(key, nsems, IPC_CREAT | 0666);
         if (semid == -1) {
             perror("semget (create) failed");
@@ -218,6 +219,42 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
         printf("Semaphore set with key %d removed.\n", key);
+    }
+    else if(strcmp(command,"listp")==0)
+    {
+       if (argc != 4) {
+            usage(argv[0]);
+            exit(EXIT_FAILURE);
+        }
+        int semnum = atoi(argv[4]);//number of semaphore
+        semid = semget(key, nsems, IPC_CREAT | 0666);
+        if (semid == -1) {
+            perror("semget (create) failed");
+            exit(EXIT_FAILURE);
+        }
+
+        if (semnum >= 0) 
+        {
+		int waiting = semctl(semid, semnum, GETNCNT);
+		if (waiting == -1) {
+		    perror("semctl GETNCNT failed");
+		    return;
+		}
+        	printf("Semaphore %d: %d processes waiting.\n", semnum, waiting);
+        } 
+        else
+        {
+        for (int i = 0; i < nsems; i++) {
+            int waiting = semctl(semid, i, GETNCNT);
+            if (waiting == -1) 
+            {
+                perror("semctl GETNCNT failed");
+                return;
+            }
+            printf("Semaphore %d: %d processes waiting.\n", i, waiting);
+        }
+      }
+
     }
     else {
         usage(argv[0]);

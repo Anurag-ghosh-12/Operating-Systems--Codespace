@@ -2,7 +2,8 @@
    Many consumer (nconsumer no.) threads can consume from the sharedData (the integer variable)
    A producer thread cannot produce any data unless the earlier data produced by some
    producer thread is consumed by some consumer thread. Data produced by a producer thread can be consumed
-   by only one consumer thread. */
+   by only one consumer thread. 
+   */
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h> /* for thread functions */

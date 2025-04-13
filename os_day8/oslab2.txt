@@ -1,0 +1,1 @@
+Memory management controls allocation and deallocation.

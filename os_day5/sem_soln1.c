@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
       }
       printf("The semaphore values are :\t");
       for (int i = 0; i < num_of_sem; i++) {
-        printf("%d", sem_values[i]);
+        printf("%d",sem_values[i]);
       }
     }
   }
